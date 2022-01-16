@@ -1,0 +1,13 @@
+---
+- hosts: all
+  tasks:
+  - name: Setup cron job to run ansible
+    become: yes
+    become_method: sudo
+    cron:
+      name: "ansible update"
+      user: "ansible_user"
+      hour: "*"
+      minute: "*/5"
+      job: "ansible-playbook /provision/provision.yml -i /provision/inventory.ini"
+      state: present
