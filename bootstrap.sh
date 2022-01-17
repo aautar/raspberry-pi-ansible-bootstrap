@@ -26,6 +26,7 @@ echo "ansible_user  ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/ansible_us
 cd /raspberry-pi-ansible-bootstrap
 sudo mkdir /provision
 sudo cp provision.yml /provision/provision.yml
+sudo cp app.js /provision/app.js
 
 # Enable logging for Ansible
 sudo touch /var/log/ansible.log

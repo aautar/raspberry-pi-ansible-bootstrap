@@ -1,5 +1,8 @@
 ---
 - hosts: all
+  vars:
+    NODEJS_VERSION: "16"
+    ansible_distribution_release: "buster"
   tasks:
   - name: Setup cron job to run ansible
     become: yes
@@ -11,3 +14,41 @@
       minute: "*/5"
       job: "ansible-playbook /provision/provision.yml -i /provision/inventory.ini"
       state: present
+  - name: Install gpg
+    apt:
+      name: ['gpg']
+      state: present
+    become: true
+    tags: packages
+  - name: Install the gpg key for nodejs LTS
+    apt_key:
+      url: "https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+      state: present
+    become: true
+  - name: Install the nodejs LTS repos
+    apt_repository:
+      repo: "deb https://deb.nodesource.com/node_{{ NODEJS_VERSION }}.x {{ ansible_distribution_release }} main"
+      state: present
+      update_cache: yes
+    become: true
+  - name: Install nodejs
+    apt:
+      name: nodejs
+      state: present
+    become: true
+  - name: Install PM2
+    npm:
+      name: pm2
+      global: yes
+      state: present
+    become: true
+  - name: Start application
+    command: "pm2 start /provision/app.js"
+    become: true
+    register: ret
+    failed_when: >-
+      ret.rc != 0 and
+      '[PM2][ERROR] Script already launched' not in ret.stderr
+    changed_when: >-
+      ret.rc != 0 and
+      '[PM2][ERROR] Script already launched' not in ret.stderr
