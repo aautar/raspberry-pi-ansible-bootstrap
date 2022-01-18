@@ -3,8 +3,8 @@ sudo apt-get install software-properties-common -y
 
 sudo apt-get update -y
 sudo apt-get install acl -y
-sudo apt-get install ansible -y
 sudo apt-get install sshpass -y
+sudo apt-get install ansible -y
 
 sudo cp /etc/hosts /etc/ansible/hosts
 
@@ -23,10 +23,10 @@ sudo chown -R ansible_user /home/ansible_user/.ssh
 echo "ansible_user  ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/ansible_user
 
 # Install Git
-sudo apt install git
+sudo apt install git -y
 
 # Clone repo with bootstrap
-sudo git clone https://github.com/aautar/raspberry-pi-ansible-bootstrap.git /home/ansible_user/
+sudo git clone https://github.com/aautar/raspberry-pi-ansible-bootstrap.git /home/ansible_user/code
 
 # Enable logging for Ansible
 sudo touch /var/log/ansible.log
@@ -42,4 +42,4 @@ ENDINV
 
 # Run ansible playbook
 export PYTHONUNBUFFERED=1
-sudo -u ansible_user ansible-playbook /home/ansible_user/raspberry-pi-ansible-bootstrap/provision.yml -i /home/ansible_user/inventory.ini
+sudo -u ansible_user ansible-playbook /home/ansible_user/code/raspberry-pi-ansible-bootstrap/provision.yml -i /home/ansible_user/inventory.ini
