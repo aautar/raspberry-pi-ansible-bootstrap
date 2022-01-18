@@ -12,8 +12,12 @@
       user: "ansible_user"
       hour: "*"
       minute: "*/5"
-      job: "ansible-playbook /provision/provision.yml -i /provision/inventory.ini"
+      job: "ansible-playbook /home/ansible_user/raspberry-pi-ansible-bootstrap/provision.yml -i /home/ansible_user/inventory.ini"
       state: present
+  - name: Pull latest from raspberry-pi-ansible-bootstrap
+    git:
+      repo: https://github.com/aautar/raspberry-pi-ansible-bootstrap.git
+      dest: /home/ansible_user
   - name: Install gpg
     apt:
       name: ['gpg']
@@ -43,7 +47,7 @@
       state: present
     become: true
   - name: Start application
-    command: "pm2 start /provision/app.js"
+    command: "pm2 start /home/ansible_user/raspberry-pi-ansible-bootstrap/app.js"
     become: true
     register: ret
     failed_when: >-
