@@ -18,6 +18,7 @@
     git:
       repo: https://github.com/aautar/raspberry-pi-ansible-bootstrap.git
       dest: /home/ansible_user/code/raspberry-pi-ansible-bootstrap
+    become: true
   - name: Install gpg
     apt:
       name: ['gpg']
