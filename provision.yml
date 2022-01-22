@@ -47,5 +47,5 @@
       global: yes
       state: present
     become: true
-  - name: Execute post-bootstrap plays
-    import_tasks: /home/ansible_user/code/raspberry-pi-ansible-bootstrap/post-bootstrap.yml
+  - name: Execute post-provision plays
+    import_tasks: /home/ansible_user/code/raspberry-pi-ansible-bootstrap/app-provision.yml
