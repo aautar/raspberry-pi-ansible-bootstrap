@@ -14,7 +14,7 @@
       minute: "*/5"
       job: "ansible-playbook /home/ansible_user/code/raspberry-pi-ansible-bootstrap/provision.yml -i /home/ansible_user/inventory.ini"
       state: present
-  - name: Pull latest from raspberry-pi-ansible-bootstrap
+  - name: Pull latest from raspberry-pi-ansible-bootstrap repo
     git:
       repo: https://github.com/aautar/raspberry-pi-ansible-bootstrap.git
       dest: /home/ansible_user/code/raspberry-pi-ansible-bootstrap
@@ -47,5 +47,5 @@
       global: yes
       state: present
     become: true
-  - name: Execute custom plays
-    import_playbook: otherplays.yml
+  - name: Execute post-bootstrap plays
+    import_tasks: /home/ansible_user/code/raspberry-pi-ansible-bootstrap/post-bootstrap.yml
