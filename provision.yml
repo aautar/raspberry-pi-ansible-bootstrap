@@ -47,13 +47,5 @@
       global: yes
       state: present
     become: true
-  - name: Start application
-    command: "pm2 start /home/ansible_user/code/raspberry-pi-ansible-bootstrap/app.js"
-    become: true
-    register: ret
-    failed_when: >-
-      ret.rc != 0 and
-      '[PM2][ERROR] Script already launched' not in ret.stderr
-    changed_when: >-
-      ret.rc != 0 and
-      '[PM2][ERROR] Script already launched' not in ret.stderr
+  - name: Execute custom plays
+    import_playbook: otherplays.yml
