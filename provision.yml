@@ -45,12 +45,12 @@
     apt:
       name: npm
       state: present
+    become: true
   - name: Install PM2
     npm:
       name: pm2
       global: yes
       state: present
-    become: true
   - name: Execute post-provision plays
     import_tasks: /home/ansible_user/code/raspberry-pi-ansible-bootstrap/tasks/app-tasks.yml
     vars:
