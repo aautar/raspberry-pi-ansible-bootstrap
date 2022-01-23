@@ -5,8 +5,9 @@
     git:
       repo: "{{ app_repo_url }}"
       dest: /home/ansible_user/code/app
+      clone: yes
+      update: yes
       accept_hostkey: yes
-    become: true
   - name: Start application
     command: "pm2 start /home/ansible_user/code/app/app.js"
     become: true
