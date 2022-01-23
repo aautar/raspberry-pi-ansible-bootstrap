@@ -8,6 +8,9 @@ sudo apt-get install ansible -y
 
 sudo cp /etc/hosts /etc/ansible/hosts
 
+# Write app repo URL to file
+echo "$1" > /home/ansible_user/code/raspberry-pi-ansible-bootstrap/app-repo-url.txt
+
 # Generate ansible user
 ansible_user_random_password=openssl rand -hex 20
 sudo useradd -d /home/ansible_user -m ansible_user -p $(openssl passwd -1 ansible_user_random_password)

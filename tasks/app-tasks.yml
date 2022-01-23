@@ -1,11 +1,11 @@
 ---
   - name: Pull latest from raspberry-pi-ansible-bootstrap repo
     git:
-      repo: '{{ repo_url }}'
+      repo: '{{ app_repo_url }}'
       dest: /home/ansible_user/code/app
     become: true
   - name: Start application
-    command: "pm2 start /home/ansible_user/code/raspberry-pi-ansible-bootstrap/app.js"
+    command: "pm2 start /home/ansible_user/code/app/app.js"
     become: true
     register: ret
     failed_when: >-
