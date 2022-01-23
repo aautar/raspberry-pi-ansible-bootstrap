@@ -48,4 +48,4 @@
       state: present
     become: true
   - name: Execute post-provision plays
-    import_tasks: /home/ansible_user/code/raspberry-pi-ansible-bootstrap/app-provision.yml
+    import_tasks: /home/ansible_user/code/raspberry-pi-ansible-bootstrap/tasks/app-tasks.yml
