@@ -1,5 +1,5 @@
 ---
-  - name: Pull latest from raspberry-pi-ansible-bootstrap repo
+  - name: Pull latest from application repo
     git:
       repo: '{{ app_repo_url }}'
       dest: /home/ansible_user/code/app
