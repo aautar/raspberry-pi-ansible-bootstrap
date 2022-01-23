@@ -8,8 +8,12 @@
       clone: yes
       update: yes
       accept_hostkey: yes
+  - name: Install application dependencies
+    shell: npm install
+    args:
+      chdir:  /home/ansible_user/code/app
   - name: Start application
-    command: "pm2 start /home/ansible_user/code/app/app.js"
+    command: "pm2 start /home/ansible_user/code/app/src/app.js"
     register: ret
     failed_when: >-
       ret.rc != 0 and
