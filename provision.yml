@@ -3,7 +3,7 @@
   vars:
     NODEJS_VERSION: "16"
     ansible_distribution_release: "buster"
-    app_repo_url: "{{ lookup('file', '/home/ansible_user/code/raspberry-pi-ansible-bootstrap/app-repo-url.txt') }}"
+    application_repo_url: "{{ lookup('file', '/home/ansible_user/code/raspberry-pi-ansible-bootstrap/app-repo-url.txt') }}"
   tasks:
   - name: Setup cron job to run ansible
     become: yes
@@ -51,4 +51,4 @@
   - name: Execute post-provision plays
     import_tasks: /home/ansible_user/code/raspberry-pi-ansible-bootstrap/tasks/app-tasks.yml
     vars:
-      app_repo_url: "{{app_repo_url}}"
+      app_repo_url: "{{application_repo_url}}"
