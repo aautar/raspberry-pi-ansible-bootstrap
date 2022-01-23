@@ -1,7 +1,9 @@
 ---
+  - debug:
+      msg: "app_repo_url = {{ app_repo_url }}"
   - name: Pull latest from application repo
     git:
-      repo: '{{ app_repo_url }}'
+      repo: "{{ app_repo_url }}"
       dest: /home/ansible_user/code/app
       accept_hostkey: yes
     become: true
