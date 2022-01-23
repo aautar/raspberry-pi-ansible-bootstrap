@@ -51,3 +51,4 @@
     import_tasks: /home/ansible_user/code/raspberry-pi-ansible-bootstrap/tasks/app-tasks.yml
     vars:
       app_repo_url: "{{application_repo_url}}"
+      app_folder: "worker"

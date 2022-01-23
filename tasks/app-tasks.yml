@@ -1,6 +1,8 @@
 ---
   - debug:
       msg: "app_repo_url = {{ app_repo_url }}"
+  - debug:
+      msg: "app_folder = {{ app_folder }}"
   - name: Pull latest from application repo
     git:
       repo: "{{ app_repo_url }}"
@@ -11,9 +13,9 @@
   - name: Install application dependencies
     shell: npm install
     args:
-      chdir:  /home/ansible_user/code/app
+      chdir:  "/home/ansible_user/code/app/{{app_folder}}"
   - name: Start application
-    command: "pm2 start /home/ansible_user/code/app/src/app.js"
+    command: "pm2 start /home/ansible_user/code/app/{{app_folder}}/src/app.js"
     register: ret
     failed_when: >-
       ret.rc != 0 and
