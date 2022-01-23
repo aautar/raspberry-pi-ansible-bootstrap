@@ -41,11 +41,6 @@
       name: nodejs
       state: present
     become: true
-  - name: Install npm
-    apt:
-      name: npm
-      state: present
-    become: true
   - name: Install PM2
     npm:
       name: pm2
