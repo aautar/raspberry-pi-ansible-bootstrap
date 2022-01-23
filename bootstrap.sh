@@ -29,7 +29,7 @@ echo "ansible_user  ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/ansible_us
 sudo apt install git -y
 
 # Clone repo with bootstrap
-sudo git clone https://github.com/aautar/raspberry-pi-ansible-bootstrap.git /home/ansible_user/code/raspberry-pi-ansible-bootstrap
+sudo -u ansible_user git clone https://github.com/aautar/raspberry-pi-ansible-bootstrap.git /home/ansible_user/code/raspberry-pi-ansible-bootstrap
 
 # Enable logging for Ansible
 sudo touch /var/log/ansible.log
