@@ -10,7 +10,6 @@
       accept_hostkey: yes
   - name: Start application
     command: "pm2 start /home/ansible_user/code/app/app.js"
-    become: true
     register: ret
     failed_when: >-
       ret.rc != 0 and
