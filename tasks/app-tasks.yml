@@ -15,7 +15,7 @@
     args:
       chdir:  "/home/ansible_user/code/app/{{app_folder}}"
   - name: Start application
-    command: "pm2 start /home/ansible_user/code/app/{{app_folder}}/src/app.js"
+    command: "pm2 start /home/ansible_user/code/app/{{app_folder}}/src/app.js --watch"
     register: ret
     failed_when: >-
       ret.rc != 0 and
