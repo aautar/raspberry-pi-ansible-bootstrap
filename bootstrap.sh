@@ -15,7 +15,7 @@ sudo adduser ansible_user sudo
 
 sudo mkdir /home/ansible_user/.ssh
 sudo ssh-keygen -t rsa -N "" -f /home/ansible_user/.ssh/id_rsa
-sudo cat /home/ansible_user/.ssh/id_rsa.pub >> /home/ansible_user/.ssh/authorized_keys
+sudo cat /home/ansible_user/.ssh/id_rsa.pub | sudo tee -a /home/ansible_user/.ssh/authorized_keys > /dev/null
 ssh-keyscan localhost | sudo tee /home/ansible_user/.ssh/known_hosts
 sudo chown -R ansible_user /home/ansible_user/.ssh
 
@@ -37,8 +37,8 @@ sudo setfacl -m u:ansible_user:rwx /var/log/ansible.log
 sudo sed -i 's|#log_path = /var/log/ansible.log|log_path = /var/log/ansible.log|' /etc/ansible/ansible.cfg
 
 # Create ansible inventory
-sudo touch /home/ansible_user/inventory.ini
-sudo cat << 'ENDINV' > /home/ansible_user/inventory.ini
+sudo -u ansible_user touch /home/ansible_user/inventory.ini
+sudo -u ansible_user tee /home/ansible_user/inventory.ini >/dev/null << 'ENDINV'
 [hosts]
 localhost ansible_connection=ssh ansible_user=ansible_user
 ENDINV
