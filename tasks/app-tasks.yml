@@ -9,6 +9,7 @@
       dest: /home/ansible_user/code/app
       clone: yes
       update: yes
+      force: yes
       accept_hostkey: yes
   - name: Install application dependencies
     shell: npm install
