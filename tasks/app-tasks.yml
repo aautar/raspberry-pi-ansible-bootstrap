@@ -21,7 +21,7 @@
   - debug:
       msg: "pm2_proc_list = {{ (pm2_proc_list.stdout | from_json) }}"
   - set_fact:
-      appVersion: "{{ (pm2_proc_list.stdout | from_json)[0].version }}"
+      appVersion: "{{ (pm2_proc_list.stdout | from_json)[0].versioning.version }}"
   - debug:
       msg: "Version of app running = {{ appVersion }}"
   - name: Start application
