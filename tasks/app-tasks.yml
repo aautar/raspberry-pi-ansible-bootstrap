@@ -15,6 +15,13 @@
     shell: npm install
     args:
       chdir:  "/home/ansible_user/code/app/{{app_folder}}"
+  - name: Get info on running app
+    command: "pm2 jlist"
+    register: pm2_proc_list
+  - set_fact:
+      appVersion: "{{ pm2_proc_list.json[0].version }}"
+  - debug:
+      msg: "Version of app running = {{ appVersion }}"
   - name: Start application
     command: "pm2 start /home/ansible_user/code/app/{{app_folder}}/src/app.js --watch"
     register: ret
