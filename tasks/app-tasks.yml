@@ -36,4 +36,4 @@
     when: existingAppVersion|length == 0
   - name: Restart application
     command: "pm2 restart app"
-    when: existingAppVersion|length > 0 and existingAppVersion != newAppVersion
+    when: existingAppVersion != newAppVersion
