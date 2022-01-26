@@ -25,17 +25,15 @@
   - debug:
       msg: "pm2_proc_list = {{ (pm2_proc_list.stdout | from_json) }}"
   - set_fact:
-      existingAppVersion: "{{ item.pm2_env.version }}"
+      existingAppVersion: "{{ item.pm2_env.version | default('') }}"
     when: item.name == "app"
     with_items: "{{ pm2_proc_list.stdout | from_json }}"
   - debug:
       msg: "Version of app running = {{ existingAppVersion }}"
   - name: Start application
-    command: "pm2 start /home/ansible_user/code/app/{{app_folder}}/src/app.js --watch"
+    command: "pm2 start /home/ansible_user/code/app/{{app_folder}}/src/app.js"
     register: ret
-    failed_when: >-
-      ret.rc != 0 and
-      '[PM2][ERROR] Script already launched' not in ret.stderr
-    changed_when: >-
-      ret.rc != 0 and
-      '[PM2][ERROR] Script already launched' not in ret.stderr
+    when: existingAppVersion|length == 0
+  - name: Restart application
+    command: "pm2 restart app"
+    when: existingAppVersion|length > 0 and existingAppVersion != newAppVersion
