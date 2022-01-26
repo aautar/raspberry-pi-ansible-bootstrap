@@ -17,6 +17,8 @@
       chdir:  "/home/ansible_user/code/app/{{app_folder}}"
   - set_fact:
       newAppVersion: "{{ (lookup('file', '/home/ansible_user/code/app/' + app_folder + '/package.json') | from_json).get('version') }}"
+  - set_fact:
+      existingAppVersion: ""
   - debug:
       msg: "Version of app pulled down = {{ newAppVersion }}"
   - name: Get info on running app
