@@ -21,7 +21,7 @@
   - debug:
       msg: "pm2_proc_list = {{ (pm2_proc_list.stdout | from_json) }}"
   - set_fact:
-      appVersion: "{{ item.pm2_env.versioning.version }}"
+      appVersion: "{{ item.pm2_env.version }}"
     when: item.name == "app"
     with_items: "{{ pm2_proc_list.stdout | from_json }}"
   - debug:
