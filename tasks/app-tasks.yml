@@ -18,8 +18,10 @@
   - name: Get info on running app
     command: "pm2 jlist"
     register: pm2_proc_list
+  - debug:
+      msg: "pm2_proc_list = {{ (pm2_proc_list.stdout | from_json) }}"
   - set_fact:
-      appVersion: "{{ pm2_proc_list.json[0].version }}"
+      appVersion: "{{ (pm2_proc_list.stdout | from_json)[0].version }}"
   - debug:
       msg: "Version of app running = {{ appVersion }}"
   - name: Start application
