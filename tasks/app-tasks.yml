@@ -20,6 +20,10 @@
     register: pm2_proc_list
   - debug:
       msg: "pm2_proc_list = {{ (pm2_proc_list.stdout | from_json) }}"
+  - debug:
+      msg: "pm2_proc_list = {{ (pm2_proc_list.stdout | from_json)[0] }}"
+  - debug:
+      msg: "pm2_proc_list = {{ (pm2_proc_list.stdout | from_json)[0].pm2_env }}"
   - set_fact:
       appVersion: "{{ item.pm2_env.version }}"
     when: item.name == "app"
