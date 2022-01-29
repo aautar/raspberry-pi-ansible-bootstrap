@@ -3,6 +3,14 @@
       msg: "app_repo_url = {{ app_repo_url }}"
   - debug:
       msg: "app_folder = {{ app_folder }}"
+  - name: Check if application secrets file exists
+    stat:
+      path: /home/ansible_user/.app/app-secrets-url.txt
+    register: app_secrets_file
+  - name: Application secrets file existence
+    debug:
+      msg: "app secrets file exists"
+    when: app_secrets_file.stat.exists
   - name: Pull latest from application repo
     git:
       repo: "{{ app_repo_url }}"
