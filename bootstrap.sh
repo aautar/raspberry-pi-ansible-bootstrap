@@ -31,6 +31,12 @@ sudo -u ansible_user git clone https://github.com/aautar/raspberry-pi-ansible-bo
 # Write app repo URL to file
 echo "$1" | sudo -u ansible_user tee /home/ansible_user/code/raspberry-pi-ansible-bootstrap/app-repo-url.txt > /dev/null
 
+# Write secrets URL to file
+if [ -n "$2" ]; then
+  sudo chmod +x /home/ansible_user/code/raspberry-pi-ansible-bootstrap/write-secrets-url.sh
+  sudo -u ansible_user sh /home/ansible_user/code/raspberry-pi-ansible-bootstrap/write-secrets-url.sh "$2"
+fi
+
 # Enable logging for Ansible
 sudo touch /var/log/ansible.log
 sudo setfacl -m u:ansible_user:rwx /var/log/ansible.log
