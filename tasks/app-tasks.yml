@@ -15,7 +15,6 @@
     vars:
       remote_url: "{{ lookup('file', '/home/ansible_user/.app/app-secrets-url.txt') }}"
     when: app_secrets_url_file.stat.exists
-    no_log: True
   - name: Pull latest from application repo
     git:
       repo: "{{ app_repo_url }}"
