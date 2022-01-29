@@ -3,14 +3,19 @@
       msg: "app_repo_url = {{ app_repo_url }}"
   - debug:
       msg: "app_folder = {{ app_folder }}"
-  - name: Check if application secrets file exists
+  - name: Check if application secrets URL file exists
     stat:
       path: /home/ansible_user/.app/app-secrets-url.txt
-    register: app_secrets_file
-  - name: Application secrets file existence
+    register: app_secrets_url_file
+  - name: Application secrets URL file existence
     debug:
-      msg: "app secrets file exists"
-    when: app_secrets_file.stat.exists
+      msg: "app_secrets_url_file.stat.exists = {{app_secrets_url_file}}"
+  - name: Download application secrets file
+    command: "scp {{remote_url}} /home/ansible_user/.app/app-secrets.yaml"
+    vars:
+      remote_url: "{{ lookup('file', '/home/ansible_user/.app/app-secrets-url.txt') }}"
+    when: app_secrets_url_file.stat.exists
+    no_log: True
   - name: Pull latest from application repo
     git:
       repo: "{{ app_repo_url }}"
