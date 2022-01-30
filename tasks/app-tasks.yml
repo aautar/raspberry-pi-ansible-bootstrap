@@ -14,7 +14,7 @@
     command: "sshpass -p {{remote_password}} scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null {{remote_url}} /home/ansible_user/.app/app-secrets.yaml"
     vars:
       remote_url: "{{ lookup('file', '/home/ansible_user/.app/app-secrets-url.txt') }}"
-      remote_password: {{  lookup('file', '/home/ansible_user/.app/app-secrets-remote-password.txt') }}
+      remote_password: "{{  lookup('file', '/home/ansible_user/.app/app-secrets-remote-password.txt') }}"
     when: app_secrets_url_file.stat.exists
   - name: Pull latest from application repo
     git:
