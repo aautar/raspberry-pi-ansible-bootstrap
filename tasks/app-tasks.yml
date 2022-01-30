@@ -47,8 +47,14 @@
       msg: "Version of app running = {{ existingAppVersion }}"
   - name: Start application
     command: "pm2 start /home/ansible_user/code/app/{{app_folder}}/src/app.js"
+    environment: "{{ app_env }}"
+    vars:
+      app_env: "{{ lookup('file', '/home/ansible_user/.app/app-secrets.yaml')|from_yaml}}"
     register: ret
     when: existingAppVersion|length == 0
   - name: Restart application
-    command: "pm2 restart app"
+    command: "pm2 restart app --update-env"
+    environment: "{{ app_env }}"
+    vars:
+      app_env: "{{ lookup('file', '/home/ansible_user/.app/app-secrets.yaml')|from_yaml}}"
     when: existingAppVersion|length != 0 and existingAppVersion != newAppVersion
