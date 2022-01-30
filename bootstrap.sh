@@ -34,7 +34,7 @@ echo "$1" | sudo -u ansible_user tee /home/ansible_user/code/raspberry-pi-ansibl
 # Write secrets URL to file
 if [ -n "$2" ]; then
   sudo chmod +x /home/ansible_user/code/raspberry-pi-ansible-bootstrap/write-secrets-url.sh
-  sudo -u ansible_user sh /home/ansible_user/code/raspberry-pi-ansible-bootstrap/write-secrets-url.sh "$2"
+  sudo -u ansible_user bash /home/ansible_user/code/raspberry-pi-ansible-bootstrap/write-secrets-url.sh "$2"
 fi
 
 # Enable logging for Ansible
