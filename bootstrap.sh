@@ -39,8 +39,8 @@ fi
 
 # Enable logging for Ansible
 sudo touch /var/log/ansible.log
-sudo setfacl -m u:ansible_user:rwx /var/log/ansible.log
-sudo sed -i 's|#log_path = /var/log/ansible.log|log_path = /var/log/ansible.log|' /etc/ansible/ansible.cfg
+sudo -u ansible_user touch /home/ansible_user/.ansible.cfg
+printf "[defaults]\nlog_path = /var/log/ansible.log\n" | sudo tee /home/ansible_user/.ansible.cfg
 
 # Create ansible inventory
 sudo -u ansible_user touch /home/ansible_user/inventory.ini
