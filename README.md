@@ -26,7 +26,13 @@ If the application repo pointed to is private, you will need to ensure Git can a
 You can get the public key via `tail /home/ansible_user/.ssh/id_rsa.pub`
 
 ### Secrets 
-If the application requires secrets, the app-tasks playbook will attempt to download the file via SCP. 
+If the application requires secrets, the app-tasks playbook will attempt to download the file via SCP.
+
+If the secrets URL needs to be updated, the `write-secrets-url.sh` script can be used.
+
+```bash
+bash /home/ansible_user/code/raspberry-pi-ansible-bootstrap/write-secrets-url.sh user@remote-host:path/to/remote/file.ext
+```
 
 ## Limitations
 - Setup is only for a NodeJS application
