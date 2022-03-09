@@ -1,0 +1,18 @@
+---
+- name: Setup logrotate for ansible.log
+  blockinfile:
+    path: "/etc/logrotate.d/{{ item.path }}"
+    block: "{{ item.conf }}"
+    create: true
+  loop: "{{ lp_logrotate_confd }}"
+  vars:
+    lp_logrotate_confd:
+      - path: ansible
+        conf: |
+          /var/log/ansible.log {
+             weekly
+             rotate 3
+             size 10M
+             compress
+             delaycompress
+          }
