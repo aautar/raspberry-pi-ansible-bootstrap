@@ -1,5 +1,6 @@
 ---
 - name: Setup logrotate for ansible.log
+  become: true
   blockinfile:
     path: "/etc/logrotate.d/{{ item.path }}"
     block: "{{ item.conf }}"
