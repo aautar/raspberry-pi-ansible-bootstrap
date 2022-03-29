@@ -2,7 +2,8 @@
 - name: Check internet connection
   command: "ping -c4 github.com"
   register: internet_ret
+  changed_when: internet_ret.rc != 0
 - name: Restart network
   command: "/etc/init.d/networking restart"
   become: true
-  when: internet_ret != 0
+  when: internet_ret.rc != 0
