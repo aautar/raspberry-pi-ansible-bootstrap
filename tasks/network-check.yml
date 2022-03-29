@@ -1,0 +1,9 @@
+---
+- name: Check internet connection
+  command: |
+    ping -c4 github.com
+    if [ $? != 0 ]
+    then
+      sudo /etc/init.d/networking restart
+    fi
+  become: true

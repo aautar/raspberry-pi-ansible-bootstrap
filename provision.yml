@@ -17,6 +17,8 @@
       state: present
   - name: Execute logrotate tasks
     import_tasks: /home/ansible_user/code/raspberry-pi-ansible-bootstrap/tasks/logrotate.yml
+  - name: Executing network check
+    import_tasks: /home/ansible_user/code/raspberry-pi-ansible-bootstrap/tasks/network-check.yml
   - name: Pull latest from raspberry-pi-ansible-bootstrap repo
     git:
       repo: https://github.com/aautar/raspberry-pi-ansible-bootstrap.git
