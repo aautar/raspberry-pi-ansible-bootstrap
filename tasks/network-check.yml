@@ -1,9 +1,8 @@
 ---
 - name: Check internet connection
-  command: |
-    ping -c4 github.com
-    if [ $? != 0 ]
-    then
-      sudo /etc/init.d/networking restart
-    fi
+  command: "ping -c4 github.com"
+  register: internet_ret
+- name: Restart network
+  command: "sudo /etc/init.d/networking restart"
   become: true
+  when: internet_ret != 0
