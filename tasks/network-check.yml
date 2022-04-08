@@ -4,7 +4,8 @@
   register: internet_ret
   changed_when: internet_ret.rc != 0
   ignore_errors: yes
-- name: Restart network
-  command: "/etc/init.d/networking restart"
+- name: Restart machine if network down
+  reboot:
+    reboot_timeout: 300
   become: true
   when: internet_ret.rc != 0
